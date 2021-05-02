@@ -24,5 +24,8 @@ export default {
       mdiLogout,
     },
   }),
+  mounted() {
+    this.$store.dispatch('fetchContactsData')
+  },
 }
 </script>
