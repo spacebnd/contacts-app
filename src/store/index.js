@@ -8,11 +8,15 @@ export default new Vuex.Store({
   state: {
     contactsData: {},
   },
+
+  getters: {},
+
   mutations: {
     setContactsData(state, payload) {
       state.contactsData = payload
     },
   },
+
   actions: {
     async fetchContactsData({ commit }) {
       const snapshot = await db.ref().child('contacts').get()
@@ -24,5 +28,4 @@ export default new Vuex.Store({
       }
     },
   },
-  modules: {},
 })

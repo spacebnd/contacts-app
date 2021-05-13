@@ -6,9 +6,11 @@
           <v-row>
             <v-text-field label="Email" required></v-text-field>
           </v-row>
+
           <v-row>
             <v-text-field label="Password" required></v-text-field>
           </v-row>
+
           <v-row justify="center">
             <v-btn type="submit" class="align-center mt-4" elevation="2">Log in</v-btn>
           </v-row>
@@ -21,6 +23,7 @@
 <script>
 export default {
   name: 'Login',
+
   methods: {
     onSubmit() {
       this.$router.push({ path: '/' })
