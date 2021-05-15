@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-navigation-drawer app v-model="drawer"> </v-navigation-drawer>
+    <v-navigation-drawer app v-model="drawer">
+      <ContactsList />
+    </v-navigation-drawer>
 
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
@@ -19,19 +21,16 @@
 
 <script>
 import { mdiLogout } from '@mdi/js'
+import ContactsList from '../components/ContacstList'
 
 export default {
   name: 'ContactsLayout',
-
+  components: { ContactsList },
   data: () => ({
     drawer: null,
     icons: {
       mdiLogout,
     },
   }),
-
-  mounted() {
-    this.$store.dispatch('fetchContactsData')
-  },
 }
 </script>

@@ -9,7 +9,11 @@ export default new Vuex.Store({
     contactsData: {},
   },
 
-  getters: {},
+  getters: {
+    contactsData: (state) => {
+      return state.contactsData
+    },
+  },
 
   mutations: {
     setContactsData(state, payload) {
@@ -21,8 +25,13 @@ export default new Vuex.Store({
     async fetchContactsData({ commit }) {
       const snapshot = await db.ref().child('contacts').get()
       if (snapshot.exists()) {
-        const payload = snapshot.val()
-        commit('setContactsData', payload)
+        const convertedData = []
+        snapshot.forEach((childSnapshot) => {
+          let item = childSnapshot.val()
+          item.key = childSnapshot.key
+          convertedData.push(item)
+        })
+        commit('setContactsData', convertedData)
       } else {
         console.error('No data available')
       }
