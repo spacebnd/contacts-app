@@ -22,15 +22,24 @@
 <script>
 import { mdiLogout } from '@mdi/js'
 import ContactsList from '../components/ContacstList'
+import ContactDetails from '../components/ContactDetails'
 
 export default {
   name: 'ContactsLayout',
-  components: { ContactsList },
+
+  components: { ContactsList, ContactDetails },
+
   data: () => ({
     drawer: null,
     icons: {
       mdiLogout,
     },
   }),
+
+  computed: {
+    activeContact: function () {
+      return this.$store.getters.activeContact
+    },
+  },
 }
 </script>

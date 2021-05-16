@@ -1,5 +1,5 @@
 <template>
-  <v-list-item>
+  <v-list-item @click="onActivateContact">
     <v-list-item-avatar>
       <v-img :src="contact.avatar"></v-img>
     </v-list-item-avatar>
@@ -11,12 +11,18 @@
 
 <script>
 export default {
-  name: 'Contact',
+  name: 'ContactListItem',
 
   props: {
     contact: {
       type: Object,
       required: true,
+    },
+  },
+
+  methods: {
+    onActivateContact() {
+      this.$store.commit('setActiveContact', this.contact)
     },
   },
 }

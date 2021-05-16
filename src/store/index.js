@@ -6,23 +6,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    contactsData: {},
+    contacts: {},
+    activeContact: null,
   },
 
   getters: {
-    contactsData: (state) => {
-      return state.contactsData
+    contacts: (state) => {
+      return state.contacts
+    },
+    activeContact: (state) => {
+      return state.activeContact
     },
   },
 
   mutations: {
-    setContactsData(state, payload) {
-      state.contactsData = payload
+    setContacts(state, payload) {
+      state.contacts = payload
+    },
+
+    setActiveContact(state, payload) {
+      state.activeContact = payload
     },
   },
 
   actions: {
-    async fetchContactsData({ commit }) {
+    async fetchContacts({ commit }) {
       const snapshot = await db.ref().child('contacts').get()
       if (snapshot.exists()) {
         const convertedData = []
@@ -31,7 +39,7 @@ export default new Vuex.Store({
           item.key = childSnapshot.key
           convertedData.push(item)
         })
-        commit('setContactsData', convertedData)
+        commit('setContacts', convertedData)
       } else {
         console.error('No data available')
       }

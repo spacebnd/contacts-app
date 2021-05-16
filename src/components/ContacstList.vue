@@ -1,19 +1,19 @@
 <template>
   <v-list>
     <v-list-item-group>
-      <Contact v-for="contact of contacts" :key="contact.id" :contact="contact" />
+      <ContactListItem v-for="contact of contacts" :key="contact.id" :contact="contact" />
     </v-list-item-group>
   </v-list>
 </template>
 
 <script>
-import Contact from './Contact'
+import ContactListItem from './ContactListItem'
 
 export default {
   name: 'ContactsList',
 
   components: {
-    Contact,
+    ContactListItem,
   },
 
   data() {
@@ -23,8 +23,8 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch('fetchContactsData')
-    this.contacts = this.$store.getters.contactsData
+    await this.$store.dispatch('fetchContacts')
+    this.contacts = this.$store.getters.contacts
   },
 }
 </script>
