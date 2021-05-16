@@ -15,7 +15,9 @@
       </v-btn>
     </v-app-bar>
 
-    <v-main> </v-main>
+    <v-main>
+      <ContactDetails v-if="activeContact" />
+    </v-main>
   </v-container>
 </template>
 
