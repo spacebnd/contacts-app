@@ -1,6 +1,11 @@
 <template>
   <v-list-item>
-    {{ contact.name }}
+    <v-list-item-avatar>
+      <v-img :src="contact.avatar"></v-img>
+    </v-list-item-avatar>
+    <v-list-item-content>
+      {{ contact.name }}
+    </v-list-item-content>
   </v-list-item>
 </template>
 
