@@ -1,5 +1,10 @@
 <template>
-  <div>{{ activeContact.name }}</div>
+  <v-card>
+    <v-card-title>
+      {{ activeContact.name }}
+    </v-card-title>
+    <v-card-text> phone: {{ activeContact.phone }} </v-card-text>
+  </v-card>
 </template>
 
 <script>
