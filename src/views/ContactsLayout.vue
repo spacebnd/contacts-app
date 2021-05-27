@@ -16,7 +16,11 @@
     </v-app-bar>
 
     <v-main>
-      <ContactDetails v-if="activeContact" />
+      <v-row align="center">
+        <v-col align-self="center">
+          <ContactDetails v-if="activeContact" />
+        </v-col>
+      </v-row>
     </v-main>
   </v-container>
 </template>
