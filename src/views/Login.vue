@@ -2,19 +2,13 @@
   <v-container fill-height>
     <v-card class="mx-auto pa-10 rounded-lg elevation-5" width="400">
       <v-form @submit.prevent="onSubmit">
-        <v-container>
-          <v-row>
-            <v-text-field label="Email" required></v-text-field>
-          </v-row>
+        <v-text-field label="Email" required solo></v-text-field>
 
-          <v-row>
-            <v-text-field label="Password" required></v-text-field>
-          </v-row>
+        <v-text-field label="Password" required solo></v-text-field>
 
-          <v-row justify="center">
-            <v-btn type="submit" class="align-center mt-4" elevation="2">Log in</v-btn>
-          </v-row>
-        </v-container>
+        <div class="d-flex justify-center">
+          <v-btn type="submit" class="align-center mt-4" elevation="2">Log in</v-btn>
+        </div>
       </v-form>
     </v-card>
   </v-container>
