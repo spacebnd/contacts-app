@@ -9,7 +9,7 @@
       <v-toolbar-title>Contacts</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
+      <v-switch v-model="$vuetify.theme.dark" />
       <v-btn icon>
         <v-icon>mdi-logout</v-icon>
       </v-btn>
