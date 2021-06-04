@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import ContactListItem from './ContactListItem'
+import ContactListItem from './ContactListItem.vue'
 
 export default {
-  name: 'ContactsList',
+  name: 'ContactList',
 
   components: {
     ContactListItem,

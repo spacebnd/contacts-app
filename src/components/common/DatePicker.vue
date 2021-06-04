@@ -9,17 +9,22 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
+        :label="label"
         v-model="outputDate"
-        label="Picker without buttons"
         readonly
+        dense
+        outlined
+        hide-details
+        :append-icon="icon"
         v-bind="attrs"
         v-on="on"
       ></v-text-field>
     </template>
     <v-date-picker
       v-model="outputDate"
-      @change="onDateChange"
+      :readonly="readonly"
       @input="menu = false"
+      @change="onDateChange"
     ></v-date-picker>
   </v-menu>
 </template>
@@ -32,6 +37,18 @@ export default {
     inputDate: {
       type: String,
       required: true,
+    },
+    label: {
+      type: String,
+      required: false,
+    },
+    icon: {
+      type: String,
+      required: false,
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
     },
   },
 

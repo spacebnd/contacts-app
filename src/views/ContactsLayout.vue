@@ -1,34 +1,31 @@
 <template>
-  <v-container>
+  <v-container fill-height>
     <v-navigation-drawer app v-model="drawer">
       <ContactsList />
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-toolbar-title>Contacts</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>{{ icons.mdiLogout }}</v-icon>
+        <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <v-row align="center">
-        <v-col align-self="center">
-          <ContactDetails v-if="activeContact" />
-        </v-col>
-      </v-row>
+      <div class="d-flex justify-center" style="height: 550px">
+        <ContactDetails v-if="activeContact" />
+      </div>
     </v-main>
   </v-container>
 </template>
 
 <script>
-import { mdiLogout } from '@mdi/js'
-import ContactsList from '../components/ContacstList'
-import ContactDetails from '../components/ContactDetails'
+import ContactsList from '../components/contact-list/ContactList.vue'
+import ContactDetails from '../components/contact-details/ContactDetails.vue'
 
 export default {
   name: 'ContactsLayout',
@@ -37,9 +34,6 @@ export default {
 
   data: () => ({
     drawer: null,
-    icons: {
-      mdiLogout,
-    },
   }),
 
   computed: {
