@@ -14,6 +14,7 @@
         readonly
         dense
         outlined
+        rounded
         hide-details
         :append-icon="icon"
         v-bind="attrs"

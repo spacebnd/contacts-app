@@ -8,6 +8,7 @@
       dense
       outlined
       hide-details
+      rounded
       @input="onModelChange"
     />
 
@@ -19,6 +20,7 @@
       outlined
       no-resize
       hide-details
+      rounded
       @input="onModelChange"
     />
 

@@ -9,16 +9,12 @@
       </div>
 
       <div>
-        <v-btn class="mb-5" block large> edit</v-btn>
-        <v-btn block large>add to favorites</v-btn>
+        <v-btn class="mb-5" block large rounded> edit</v-btn>
+        <v-btn block large rounded>add to favorites</v-btn>
       </div>
     </div>
 
-    <v-form
-      class="d-flex flex-column justify-space-between flex-grow-1"
-      style="height: 100%"
-      :readonly="readonly"
-    >
+    <v-form class="d-flex flex-column justify-space-between flex-grow-1" :readonly="readonly">
       <ContactDetailsItem
         v-for="field of contactCardFields"
         :key="field.model"
@@ -26,6 +22,7 @@
         :label="field.label"
         :input-model="contactCardData[field.model]"
         :icon="field.icon"
+        :readonly="readonly"
         @modelChanged="inputHandler"
       />
     </v-form>
@@ -53,7 +50,7 @@ export default {
         notes: '',
       },
       contactCardFields: CONTACT_CARD_FIELDS,
-      readonly: false,
+      readonly: true,
     }
   },
 
