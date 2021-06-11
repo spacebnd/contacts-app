@@ -68,7 +68,7 @@ export default {
 
   methods: {
     onDateChange(newValue) {
-      this.$emit('dateChanged', newValue)
+      this.$emit('date-changed', newValue)
     },
   },
 }

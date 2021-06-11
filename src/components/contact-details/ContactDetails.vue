@@ -2,7 +2,14 @@
   <v-card width="90%" elevation="10" class="d-flex pa-10">
     <div class="d-flex flex-column justify-space-between mr-8" style="width: 50%">
       <div class="d-flex flex-column justify-center align-center">
-        <v-img height="300" width="300" contain :src="contactCardData.photo"></v-img>
+        <ContactDetailsPhoto
+          :photo-data-url="contactCardData.photo"
+          :uploaded-data-url="uploadedDataUrl"
+          :upload-placeholder="uploadPlaceholder"
+          @file-uploaded="uploadPhoto"
+          @clear-clicked="clearUploadPhoto"
+          @delete-clicked="deletePhoto"
+        />
         <h1 class="d-flex justify-center display-1 font-weight-bold text-uppercase">
           {{ contactCardData.name }}
         </h1>
@@ -14,7 +21,7 @@
       </div>
     </div>
 
-    <v-form class="d-flex flex-column justify-space-between flex-grow-1" :readonly="readonly">
+    <v-form class="d-flex flex-column justify-space-between flex-grow-1" :readonly="isReadonly">
       <ContactDetailsItem
         v-for="field of contactCardFields"
         :key="field.model"
@@ -22,8 +29,8 @@
         :label="field.label"
         :input-model="contactCardData[field.model]"
         :icon="field.icon"
-        :readonly="readonly"
-        @modelChanged="inputHandler"
+        :is-readonly="isReadonly"
+        @model-changed="onInput"
       />
     </v-form>
   </v-card>
@@ -31,12 +38,14 @@
 
 <script>
 import { CONTACT_CARD_FIELDS } from '../../common/constants.js'
+import { getBase64 } from '../../common/utils.js'
 import ContactDetailsItem from './ContactDetailsItem.vue'
+import ContactDetailsPhoto from './ContactDetailsPhoto.vue'
 
 export default {
   name: 'ContactDetails',
 
-  components: { ContactDetailsItem },
+  components: { ContactDetailsItem, ContactDetailsPhoto },
 
   data() {
     return {
@@ -49,8 +58,10 @@ export default {
         company: '',
         notes: '',
       },
+      uploadedDataUrl: '',
+      uploadPlaceholder: 'Click to change photo', // click to upload photo
       contactCardFields: CONTACT_CARD_FIELDS,
-      readonly: true,
+      isReadonly: true,
     }
   },
 
@@ -71,8 +82,24 @@ export default {
   },
 
   methods: {
-    inputHandler(ev) {
-      console.log('inputHandler', ev)
+    onInput(ev) {
+      console.log('onInput', ev)
+    },
+
+    async uploadPhoto(file) {
+      if (file) {
+        this.uploadedDataUrl = await getBase64(file)
+        this.contactCardData.photo = this.uploadedDataUrl
+      }
+    },
+
+    clearUploadPhoto() {
+      this.contactCardData.photo = this.activeContact.photo
+      this.uploadedDataUrl = ''
+    },
+
+    deletePhoto() {
+      this.contactCardData.photo = ''
     },
   },
 }

@@ -30,8 +30,8 @@
       :label="label"
       :icon="icon"
       :input-date="inputModel"
-      :readonly="readonly"
-      @dateChanged="onModelChange"
+      :readonly="isReadonly"
+      @date-changed="onModelChange"
     />
   </div>
 </template>
@@ -44,18 +44,6 @@ export default {
 
   components: {
     DatePicker,
-  },
-
-  data() {
-    return {
-      outputModel: this.inputModel,
-    }
-  },
-
-  watch: {
-    inputModel(newValue) {
-      this.outputModel = newValue
-    },
   },
 
   props: {
@@ -76,15 +64,27 @@ export default {
       type: String,
       required: false,
     },
-    readonly: {
+    isReadonly: {
       type: Boolean,
       required: false,
     },
   },
 
+  data() {
+    return {
+      outputModel: this.inputModel,
+    }
+  },
+
+  watch: {
+    inputModel(newValue) {
+      this.outputModel = newValue
+    },
+  },
+
   methods: {
     onModelChange(newValue) {
-      this.$emit('modelChanged', newValue)
+      this.$emit('model-changed', newValue)
     },
   },
 }
