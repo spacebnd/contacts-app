@@ -7,7 +7,7 @@
         <v-text-field label="Password" required solo></v-text-field>
 
         <div class="d-flex justify-center">
-          <v-btn type="submit" class="align-center mt-4" elevation="2">Log in</v-btn>
+          <v-btn type="submit" class="align-center mt-4 elevation-10">Log in</v-btn>
         </div>
       </v-form>
     </v-card>

@@ -1,5 +1,19 @@
 <template>
-  <div>
+  <div class="d-flex flex-column justify-center align-center">
+    <div style="position: relative">
+      <div v-if="photoDataUrl" @click="onDelete" style="z-index: 20">
+        <v-icon style="position: absolute; top: 10px; right: 10px; z-index: 20">mdi-delete</v-icon>
+      </div>
+
+      <v-img
+        :src="photoDataUrl"
+        style="opacity: 0.3; border: 3px dashed red"
+        height="300"
+        width="300"
+        contain
+      />
+    </div>
+
     <div style="position: absolute; z-index: 10">
       <v-file-input
         :placeholder="uploadPlaceholder"
@@ -13,18 +27,6 @@
         ref="fileInput"
         @change="onUpload"
         @click:clear="onClear"
-      />
-    </div>
-    <div style="position: relative">
-      <div v-if="photoDataUrl" @click="onDelete" style="z-index: 20">
-        <v-icon style="position: absolute; top: 10px; right: 10px; z-index: 20">mdi-delete</v-icon>
-      </div>
-      <v-img
-        :src="photoDataUrl"
-        height="300"
-        width="300"
-        contain
-        style="opacity: 0.3; border: 3px dashed red"
       />
     </div>
   </div>
@@ -56,6 +58,7 @@ export default {
       if (this.uploadedDataUrl) {
         this.$refs.fileInput.clearableCallback()
       }
+
       this.$emit('delete-clicked')
     },
   },

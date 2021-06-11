@@ -1,19 +1,18 @@
 <template>
-  <v-card width="90%" elevation="10" class="d-flex pa-10">
+  <v-card class="d-flex pa-10 elevation-10" width="90%">
     <div class="d-flex flex-column justify-space-between mr-8" style="width: 50%">
-      <div class="d-flex flex-column justify-center align-center">
-        <ContactDetailsPhoto
-          :photo-data-url="contactCardData.photo"
-          :uploaded-data-url="uploadedDataUrl"
-          :upload-placeholder="uploadPlaceholder"
-          @file-uploaded="uploadPhoto"
-          @clear-clicked="clearUploadPhoto"
-          @delete-clicked="deletePhoto"
-        />
-        <h1 class="d-flex justify-center display-1 font-weight-bold text-uppercase">
-          {{ contactCardData.name }}
-        </h1>
-      </div>
+      <ContactDetailsPhoto
+        :photo-data-url="contactCardData.photo"
+        :uploaded-data-url="uploadedDataUrl"
+        :upload-placeholder="uploadPlaceholder"
+        @file-uploaded="uploadPhoto"
+        @clear-clicked="clearUploadPhoto"
+        @delete-clicked="deletePhoto"
+      />
+
+      <h1 class="d-flex justify-center display-1 font-weight-bold text-uppercase">
+        {{ contactCardData.name }}
+      </h1>
 
       <div>
         <v-btn class="mb-5" block large rounded> edit</v-btn>

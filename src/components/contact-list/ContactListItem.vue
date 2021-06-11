@@ -3,6 +3,7 @@
     <v-list-item-avatar>
       <v-img :src="contact.photo"></v-img>
     </v-list-item-avatar>
+
     <v-list-item-content>
       {{ contact.name }}
     </v-list-item-content>
