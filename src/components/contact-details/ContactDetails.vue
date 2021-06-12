@@ -14,10 +14,7 @@
         {{ contactCardData.name }}
       </h1>
 
-      <div>
-        <v-btn class="mb-5" block large rounded> edit</v-btn>
-        <v-btn block large rounded>add to favorites</v-btn>
-      </div>
+      <ContactDetailsButtons />
     </div>
 
     <v-form class="d-flex flex-column justify-space-between flex-grow-1" :readonly="isReadonly">
@@ -40,11 +37,12 @@ import { CONTACT_CARD_FIELDS } from '../../common/constants.js'
 import { getBase64 } from '../../common/utils.js'
 import ContactDetailsItem from './ContactDetailsItem.vue'
 import ContactDetailsPhoto from './ContactDetailsPhoto.vue'
+import ContactDetailsButtons from './ContactDetailsButtons.vue'
 
 export default {
   name: 'ContactDetails',
 
-  components: { ContactDetailsItem, ContactDetailsPhoto },
+  components: { ContactDetailsItem, ContactDetailsPhoto, ContactDetailsButtons },
 
   data() {
     return {
