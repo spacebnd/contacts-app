@@ -4,7 +4,7 @@
       <ContactDetailsPhoto
         :photo-data-url="contactCardData.photo"
         :uploaded-data-url="uploadedDataUrl"
-        :upload-placeholder="uploadPlaceholder"
+        :upload-input-placeholder="uploadInputPlaceholder"
         @file-uploaded="uploadPhoto"
         @clear-clicked="clearUploadPhoto"
         @delete-clicked="deletePhoto"
@@ -48,6 +48,7 @@ export default {
 
   data() {
     return {
+      contactCardFields: CONTACT_CARD_FIELDS,
       contactCardData: {
         photo: '',
         name: '',
@@ -58,15 +59,17 @@ export default {
         notes: '',
       },
       uploadedDataUrl: '',
-      uploadPlaceholder: 'Click to change photo', // click to upload photo
-      contactCardFields: CONTACT_CARD_FIELDS,
-      isReadonly: true,
+      isReadonly: false,
     }
   },
 
   computed: {
     activeContact() {
       return this.$store.getters.activeContact
+    },
+
+    uploadInputPlaceholder() {
+      return this.contactCardData.photo ? 'Click to change photo' : 'Click to upload photo'
     },
   },
 

@@ -16,16 +16,16 @@
 
     <div style="position: absolute; z-index: 10">
       <v-file-input
-        :placeholder="uploadPlaceholder"
+        ref="fileInput"
         accept="image/png, image/jpeg"
+        :placeholder="uploadInputPlaceholder"
+        :clearable="true"
         prepend-inner-icon="mdi-camera"
         prepend-icon=""
         hide-details
-        outlined
-        rounded
         dense
-        ref="fileInput"
         @change="onUpload"
+        @click:prepend-inner="onIconClick"
         @click:clear="onClear"
       />
     </div>
@@ -42,7 +42,7 @@ export default {
       required: true,
     },
     uploadedDataUrl: String,
-    uploadPlaceholder: String,
+    uploadInputPlaceholder: String,
   },
 
   methods: {
@@ -60,6 +60,10 @@ export default {
       }
 
       this.$emit('delete-clicked')
+    },
+
+    onIconClick() {
+      this.$refs.fileInput.$refs.input.click()
     },
   },
 }
