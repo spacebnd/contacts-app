@@ -23,17 +23,22 @@
         <ContactDetails v-if="activeContact" />
       </div>
     </v-main>
+
+    <div style="position: absolute; bottom: 30px; right: 30px; z-index: 20">
+      <AddContactButton />
+    </div>
   </v-container>
 </template>
 
 <script>
 import ContactsList from '../components/contact-list/ContactList.vue'
 import ContactDetails from '../components/contact-details/ContactDetails.vue'
+import AddContactButton from '../components/contacts-layout/AddContactButton.vue'
 
 export default {
   name: 'ContactsLayout',
 
-  components: { ContactsList, ContactDetails },
+  components: { ContactsList, ContactDetails, AddContactButton },
 
   data: () => ({
     drawer: null,
