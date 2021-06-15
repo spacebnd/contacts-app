@@ -17,7 +17,7 @@
       <ContactDetailsButtons />
     </div>
 
-    <v-form class="d-flex flex-column justify-space-between flex-grow-1" :readonly="isReadonly">
+    <v-form class="d-flex flex-column justify-space-between flex-grow-1" :readonly="!isEditable">
       <ContactDetailsItem
         v-for="field of contactCardFields"
         :key="field.model"
@@ -25,7 +25,6 @@
         :label="field.label"
         :input-model="contactCardData[field.model]"
         :icon="field.icon"
-        :is-readonly="isReadonly"
         @model-changed="onInput"
       />
     </v-form>
@@ -57,7 +56,6 @@ export default {
         notes: '',
       },
       uploadedDataUrl: '',
-      isReadonly: false,
     }
   },
 
@@ -68,6 +66,10 @@ export default {
 
     uploadInputPlaceholder() {
       return this.contactCardData.photo ? 'Click to change photo' : 'Click to upload photo'
+    },
+
+    isEditable() {
+      return this.$store.getters.isEditable
     },
   },
 

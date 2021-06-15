@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex flex-column justify-center align-center">
     <div style="position: relative">
-      <div v-if="photoDataUrl" @click="onDelete" style="z-index: 20">
+      <div v-if="isEditable && photoDataUrl" @click="onDelete" style="z-index: 20">
         <v-icon style="position: absolute; top: 10px; right: 10px; z-index: 20">mdi-delete</v-icon>
       </div>
 
       <v-img
         :src="photoDataUrl"
-        style="opacity: 0.3; border: 3px dashed red"
+        :style="isEditable ? 'opacity: 0.3; border: 3px dashed red' : ''"
         height="300"
         width="300"
         contain
@@ -16,6 +16,7 @@
 
     <div style="position: absolute; z-index: 10">
       <v-file-input
+        v-if="isEditable"
         ref="fileInput"
         accept="image/png, image/jpeg"
         :placeholder="uploadInputPlaceholder"
@@ -43,6 +44,12 @@ export default {
     },
     uploadedDataUrl: String,
     uploadInputPlaceholder: String,
+  },
+
+  computed: {
+    isEditable() {
+      return this.$store.getters.isEditable
+    },
   },
 
   methods: {

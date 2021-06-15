@@ -30,7 +30,7 @@
       :label="label"
       :icon="icon"
       :input-date="inputModel"
-      :readonly="isReadonly"
+      :readonly="!isEditable"
       @date-changed="onModelChange"
     />
   </div>
@@ -64,16 +64,18 @@ export default {
       type: String,
       required: false,
     },
-    isReadonly: {
-      type: Boolean,
-      required: false,
-    },
   },
 
   data() {
     return {
       outputModel: this.inputModel,
     }
+  },
+
+  computed: {
+    isEditable() {
+      return this.$store.getters.isEditable
+    },
   },
 
   watch: {

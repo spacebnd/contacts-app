@@ -8,14 +8,20 @@ export default new Vuex.Store({
   state: {
     contacts: {},
     activeContact: null,
+    isEditable: false,
   },
 
   getters: {
     contacts: (state) => {
       return state.contacts
     },
+
     activeContact: (state) => {
       return state.activeContact
+    },
+
+    isEditable: (state) => {
+      return state.isEditable
     },
   },
 
@@ -26,6 +32,10 @@ export default new Vuex.Store({
 
     setActiveContact(state, payload) {
       state.activeContact = payload
+    },
+
+    setIsEditable(state, payload) {
+      state.isEditable = payload
     },
   },
 
