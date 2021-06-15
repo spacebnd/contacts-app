@@ -47,6 +47,7 @@ export default {
     return {
       contactCardFields: CONTACT_CARD_FIELDS,
       contactCardData: {
+        id: '',
         photo: '',
         name: '',
         phone: '',
@@ -74,6 +75,7 @@ export default {
   },
 
   mounted() {
+    this.contactCardData.id = this.activeContact.id
     this.contactCardData.photo = this.activeContact.photo
     this.contactCardData.name = this.activeContact.name
     this.contactCardData.phone = this.activeContact.phone

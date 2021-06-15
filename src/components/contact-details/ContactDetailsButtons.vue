@@ -9,7 +9,7 @@
       <v-btn class="mb-5 red--text" block large rounded @click="toggleEditableState">
         cancel
       </v-btn>
-      <v-btn class="green--text" block large rounded>save</v-btn>
+      <v-btn class="green--text" block large rounded @click="saveContactData">save</v-btn>
     </div>
   </div>
 </template>
@@ -22,11 +22,19 @@ export default {
     isEditable() {
       return this.$store.getters.isEditable
     },
+
+    activeContact() {
+      return this.$store.getters.activeContact
+    },
   },
 
   methods: {
     toggleEditableState() {
       this.$store.commit('setIsEditable', !this.isEditable)
+    },
+
+    saveContactData() {
+      this.$store.dispatch('saveContactData', this.activeContact)
     },
   },
 }

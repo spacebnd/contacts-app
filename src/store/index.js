@@ -54,5 +54,19 @@ export default new Vuex.Store({
         console.error('No data available')
       }
     },
+
+    async saveContactData({ commit }, payload) {
+      console.log('commit', commit)
+
+      const updates = {}
+      updates['/contacts/' + payload.id] = payload
+      await db.ref().update(updates, (error) => {
+        if (error) {
+          console.error(error)
+        } else {
+          console.log('success')
+        }
+      })
+    },
   },
 })
