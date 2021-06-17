@@ -13,9 +13,14 @@
 
       <v-switch v-model="$vuetify.theme.dark" />
 
-      <v-btn icon>
-        <v-icon>mdi-logout</v-icon>
-      </v-btn>
+      <v-tooltip bottom open-delay="500">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on">
+            <v-icon>mdi-logout</v-icon>
+          </v-btn>
+        </template>
+        <span>Logout</span>
+      </v-tooltip>
     </v-app-bar>
 
     <v-main>
