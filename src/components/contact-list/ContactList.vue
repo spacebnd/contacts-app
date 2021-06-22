@@ -23,8 +23,8 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch('fetchContacts')
-    this.contacts = this.$store.getters.contacts
+    await this.$store.dispatch('contacts/fetchContactsData')
+    this.contacts = this.$store.getters['contacts/contacts']
   },
 }
 </script>

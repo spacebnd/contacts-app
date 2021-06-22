@@ -1,72 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { db } from '../main'
+import auth from './modules/auth.js'
+import ui from './modules/ui.js'
+import contacts from './modules/contacts.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    contacts: {},
-    activeContact: null,
-    isEditable: false,
-  },
-
-  getters: {
-    contacts: (state) => {
-      return state.contacts
-    },
-
-    activeContact: (state) => {
-      return state.activeContact
-    },
-
-    isEditable: (state) => {
-      return state.isEditable
-    },
-  },
-
-  mutations: {
-    setContacts(state, payload) {
-      state.contacts = payload
-    },
-
-    setActiveContact(state, payload) {
-      state.activeContact = payload
-    },
-
-    setIsEditable(state, payload) {
-      state.isEditable = payload
-    },
-  },
-
-  actions: {
-    async fetchContacts({ commit }) {
-      const snapshot = await db.ref().child('contacts').get()
-      if (snapshot.exists()) {
-        const convertedData = []
-        snapshot.forEach((childSnapshot) => {
-          let item = childSnapshot.val()
-          item.key = childSnapshot.key
-          convertedData.push(item)
-        })
-        commit('setContacts', convertedData)
-      } else {
-        console.error('No data available')
-      }
-    },
-
-    async saveContactData({ commit }, payload) {
-      console.log('commit', commit)
-
-      const updates = {}
-      updates['/contacts/' + payload.id] = payload
-      await db.ref().update(updates, (error) => {
-        if (error) {
-          console.error(error)
-        } else {
-          console.log('success')
-        }
-      })
-    },
+  modules: {
+    auth,
+    ui,
+    contacts,
   },
 })

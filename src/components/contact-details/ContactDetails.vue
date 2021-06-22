@@ -62,7 +62,7 @@ export default {
 
   computed: {
     activeContact() {
-      return this.$store.getters.activeContact
+      return this.$store.getters['contacts/activeContact']
     },
 
     uploadInputPlaceholder() {

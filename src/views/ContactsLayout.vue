@@ -51,7 +51,7 @@ export default {
 
   computed: {
     activeContact: function () {
-      return this.$store.getters.activeContact
+      return this.$store.getters['contacts/activeContact']
     },
   },
 }

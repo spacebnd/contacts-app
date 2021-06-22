@@ -23,7 +23,7 @@ export default {
 
   methods: {
     onActivateContact() {
-      this.$store.commit('setActiveContact', this.contact)
+      this.$store.commit('contacts/setActiveContact', this.contact)
     },
   },
 }

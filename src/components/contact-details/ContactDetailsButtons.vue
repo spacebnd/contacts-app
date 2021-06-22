@@ -20,21 +20,21 @@ export default {
 
   computed: {
     isEditable() {
-      return this.$store.getters.isEditable
+      return this.$store.getters['ui/isEditable']
     },
 
     activeContact() {
-      return this.$store.getters.activeContact
+      return this.$store.getters['contacts/activeContact']
     },
   },
 
   methods: {
     toggleEditableState() {
-      this.$store.commit('setIsEditable', !this.isEditable)
+      this.$store.commit('ui/setIsEditable', !this.isEditable)
     },
 
     saveContactData() {
-      this.$store.dispatch('saveContactData', this.activeContact)
+      this.$store.dispatch('contacts/saveContactData', this.activeContact)
     },
   },
 }
