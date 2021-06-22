@@ -9,7 +9,7 @@
       <v-btn class="mb-5 red--text" block large rounded @click="toggleEditableState">
         cancel
       </v-btn>
-      <v-btn class="green--text" block large rounded @click="saveContactData">save</v-btn>
+      <v-btn class="green--text" block large rounded @click="updateContactData">save</v-btn>
     </div>
   </div>
 </template>
@@ -17,6 +17,10 @@
 <script>
 export default {
   name: 'ContactDetailsButtons',
+
+  props: {
+    updatedContactData: Object,
+  },
 
   computed: {
     isEditable() {
@@ -33,8 +37,9 @@ export default {
       this.$store.commit('ui/setIsEditable', !this.isEditable)
     },
 
-    saveContactData() {
-      this.$store.dispatch('contacts/saveContactData', this.activeContact)
+    updateContactData() {
+      this.$store.dispatch('contacts/updateContactData', this.updatedContactData)
+      this.toggleEditableState()
     },
   },
 }

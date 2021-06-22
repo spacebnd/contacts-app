@@ -48,7 +48,7 @@ export default {
 
   computed: {
     isEditable() {
-      return this.$store.getters.isEditable
+      return this.$store.getters['ui/isEditable']
     },
   },
 

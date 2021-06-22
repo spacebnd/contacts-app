@@ -14,7 +14,7 @@
         {{ contactCardData.name }}
       </h1>
 
-      <ContactDetailsButtons />
+      <ContactDetailsButtons :updated-contact-data="contactCardData" />
     </div>
 
     <v-form class="d-flex flex-column justify-space-between flex-grow-1" :readonly="!isEditable">
@@ -22,7 +22,7 @@
         v-for="field of contactCardFields"
         :key="field.model"
         :type="field.fieldType"
-        :label="field.label"
+        :label="field.model"
         :input-model="contactCardData[field.model]"
         :icon="field.icon"
         @model-changed="onInput"
@@ -70,7 +70,7 @@ export default {
     },
 
     isEditable() {
-      return this.$store.getters.isEditable
+      return this.$store.getters['ui/isEditable']
     },
   },
 
@@ -86,8 +86,8 @@ export default {
   },
 
   methods: {
-    onInput(ev) {
-      console.log('onInput', ev)
+    onInput(value, model) {
+      this.contactCardData[model] = value
     },
 
     async uploadPhoto(file) {

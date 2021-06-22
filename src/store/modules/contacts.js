@@ -35,7 +35,7 @@ export default {
         const convertedData = []
         snapshot.forEach((childSnapshot) => {
           let item = childSnapshot.val()
-          item.key = childSnapshot.key
+          item.id = childSnapshot.key
           convertedData.push(item)
         })
         commit('setContactsData', convertedData)
@@ -44,7 +44,9 @@ export default {
       }
     },
 
-    async saveContactData({ commit }, payload) {
+    async updateContactData({ commit }, payload) {
+      console.log('commit', commit)
+
       const updates = {}
       updates['/contacts/' + payload.id] = payload
       await db.ref().update(updates, (error) => {

@@ -3,40 +3,43 @@
     <v-text-field
       v-if="type === 'text-field'"
       v-model="outputModel"
-      :label="label"
+      :label="startCase(label)"
       :append-icon="icon"
       dense
       outlined
       hide-details
       rounded
-      @input="onModelChange"
+      :readonly="!isEditable"
+      @input="onModelChange($event, label)"
     />
 
     <v-textarea
       v-else-if="type === 'text-area'"
       v-model="outputModel"
-      :label="label"
+      :label="startCase(label)"
       :append-icon="icon"
       outlined
       no-resize
       hide-details
       rounded
-      @input="onModelChange"
+      :readonly="!isEditable"
+      @input="onModelChange($event, label)"
     />
 
     <DatePicker
       v-else-if="type === 'date-picker'"
       v-model="outputModel"
-      :label="label"
+      :label="startCase(label)"
       :icon="icon"
       :input-date="inputModel"
       :readonly="!isEditable"
-      @date-changed="onModelChange"
+      @date-changed="onModelChange($event, label)"
     />
   </div>
 </template>
 
 <script>
+import _startCase from 'lodash/startCase'
 import DatePicker from '../common/DatePicker.vue'
 
 export default {
@@ -74,7 +77,7 @@ export default {
 
   computed: {
     isEditable() {
-      return this.$store.getters.isEditable
+      return this.$store.getters['ui/isEditable']
     },
   },
 
@@ -85,8 +88,12 @@ export default {
   },
 
   methods: {
-    onModelChange(newValue) {
-      this.$emit('model-changed', newValue)
+    onModelChange(newValue, fieldName) {
+      this.$emit('model-changed', newValue, fieldName)
+    },
+
+    startCase(value) {
+      return _startCase(value)
     },
   },
 }
