@@ -60,6 +60,12 @@ export default {
     }
   },
 
+  watch: {
+    activeContact() {
+      this.updateActiveContact()
+    },
+  },
+
   computed: {
     activeContact() {
       return this.$store.getters['contacts/activeContact']
@@ -75,17 +81,21 @@ export default {
   },
 
   mounted() {
-    this.contactCardData.id = this.activeContact.id
-    this.contactCardData.photo = this.activeContact.photo
-    this.contactCardData.name = this.activeContact.name
-    this.contactCardData.phone = this.activeContact.phone
-    this.contactCardData.birthday = this.activeContact.birthday
-    this.contactCardData.email = this.activeContact.email
-    this.contactCardData.company = this.activeContact.company
-    this.contactCardData.notes = this.activeContact.notes
+    this.updateActiveContact()
   },
 
   methods: {
+    updateActiveContact() {
+      this.contactCardData.id = this.activeContact.id
+      this.contactCardData.photo = this.activeContact.photo
+      this.contactCardData.name = this.activeContact.name
+      this.contactCardData.phone = this.activeContact.phone
+      this.contactCardData.birthday = this.activeContact.birthday
+      this.contactCardData.email = this.activeContact.email
+      this.contactCardData.company = this.activeContact.company
+      this.contactCardData.notes = this.activeContact.notes
+    },
+
     onInput(value, model) {
       this.contactCardData[model] = value
     },
