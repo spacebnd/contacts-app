@@ -1,11 +1,11 @@
 <template>
   <v-container fill-height>
-    <v-navigation-drawer app v-model="drawer">
+    <v-navigation-drawer app v-model="isDrawerOpen">
       <ContactsList />
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <v-app-bar-nav-icon @click="isDrawerOpen = !isDrawerOpen" />
 
       <v-toolbar-title>Contacts</v-toolbar-title>
 
@@ -45,12 +45,18 @@ export default {
 
   components: { ContactsList, ContactDetails, AddContactButton },
 
-  data: () => ({
-    drawer: null,
-  }),
-
   computed: {
-    activeContact: function () {
+    isDrawerOpen: {
+      get() {
+        return this.$store.getters['ui/isDrawerOpen']
+      },
+
+      set(value) {
+        return this.$store.commit('ui/setIsDrawerOpen', value)
+      },
+    },
+
+    activeContact() {
       return this.$store.getters['contacts/activeContact']
     },
   },

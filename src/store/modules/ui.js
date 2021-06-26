@@ -7,12 +7,20 @@ export default {
   },
 
   getters: {
+    isDrawerOpen: (state) => {
+      return state.isDrawerOpen
+    },
+
     isEditable: (state) => {
       return state.isEditable
     },
   },
 
   mutations: {
+    setIsDrawerOpen(state, payload) {
+      state.isDrawerOpen = payload
+    },
+
     setIsEditable(state, payload) {
       state.isEditable = payload
     },
