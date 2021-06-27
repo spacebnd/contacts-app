@@ -67,6 +67,10 @@ export default {
       type: String,
       required: false,
     },
+    required: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {

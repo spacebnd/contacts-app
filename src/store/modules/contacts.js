@@ -1,10 +1,11 @@
+import Vue from 'vue'
 import { db } from '../../main.js'
 
 export default {
   namespaced: true,
 
   state: {
-    contacts: {},
+    contacts: [],
     activeContact: null,
   },
 
@@ -21,6 +22,11 @@ export default {
   mutations: {
     setContactsData(state, payload) {
       state.contacts = payload
+    },
+
+    setContact(state, payload) {
+      const index = state.contacts.findIndex((contact) => contact.id === payload.id)
+      Vue.set(state.contacts, index, payload)
     },
 
     setActiveContact(state, payload) {
@@ -44,16 +50,18 @@ export default {
       }
     },
 
-    async updateContactData({ commit }, payload) {
-      console.log('commit', commit)
+    async createContact({ commit }, payload) {
+      console.log(commit, payload)
+    },
 
+    async updateContact({ commit }, payload) {
       const updates = {}
       updates['/contacts/' + payload.id] = payload
       await db.ref().update(updates, (error) => {
         if (error) {
           console.error(error)
         } else {
-          console.log('success')
+          commit('setContact', payload)
         }
       })
     },

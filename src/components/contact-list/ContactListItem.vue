@@ -1,5 +1,5 @@
 <template>
-  <v-list-item @click="onActivateContact">
+  <v-list-item @click="onContactClick">
     <v-list-item-avatar>
       <v-img :src="contact.photo"></v-img>
     </v-list-item-avatar>
@@ -21,8 +21,22 @@ export default {
     },
   },
 
+  computed: {
+    isEditable() {
+      return this.$store.getters['ui/isEditable']
+    },
+  },
+
   methods: {
-    onActivateContact() {
+    onContactClick() {
+      if (this.isEditable) {
+        this.$store.commit('ui/setIsEditable', false)
+      }
+
+      if (this.$vuetify.breakpoint.mobile) {
+        this.$store.commit('ui/setIsDrawerOpen', false)
+      }
+
       this.$store.commit('contacts/setActiveContact', this.contact)
     },
   },

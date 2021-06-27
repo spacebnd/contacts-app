@@ -25,7 +25,7 @@
 
     <v-main>
       <div class="d-flex justify-center" style="height: 550px">
-        <ContactDetails v-if="activeContact" />
+        <ContactDetails v-if="activeContact || isCreating" />
       </div>
     </v-main>
 
@@ -52,12 +52,18 @@ export default {
       },
 
       set(value) {
-        return this.$store.commit('ui/setIsDrawerOpen', value)
+        if (this.isDrawerOpen !== value) {
+          return this.$store.commit('ui/setIsDrawerOpen', value)
+        }
       },
     },
 
     activeContact() {
       return this.$store.getters['contacts/activeContact']
+    },
+
+    isCreating() {
+      return this.$store.getters['ui/isCreating']
     },
   },
 }

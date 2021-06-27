@@ -16,15 +16,14 @@ export default {
     ContactListItem,
   },
 
-  data() {
-    return {
-      contacts: [],
-    }
+  computed: {
+    contacts() {
+      return this.$store.getters['contacts/contacts']
+    },
   },
 
   async mounted() {
     await this.$store.dispatch('contacts/fetchContactsData')
-    this.contacts = this.$store.getters['contacts/contacts']
   },
 }
 </script>

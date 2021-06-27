@@ -78,6 +78,10 @@ export default {
     isEditable() {
       return this.$store.getters['ui/isEditable']
     },
+
+    isCreating() {
+      return this.$store.getters['ui/isCreating']
+    },
   },
 
   mounted() {

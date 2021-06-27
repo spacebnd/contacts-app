@@ -2,6 +2,7 @@ export default {
   namespaced: true,
 
   state: {
+    isDrawerOpen: false,
     isEditable: false,
     isCreating: false,
   },
@@ -14,6 +15,10 @@ export default {
     isEditable: (state) => {
       return state.isEditable
     },
+
+    isCreating: (state) => {
+      return state.isCreating
+    },
   },
 
   mutations: {
@@ -23,6 +28,10 @@ export default {
 
     setIsEditable(state, payload) {
       state.isEditable = payload
+    },
+
+    setIsCreating(state, payload) {
+      state.isCreating = payload
     },
   },
 }

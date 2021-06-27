@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column justify-center align-center">
     <div style="position: relative">
-      <div v-if="isEditable && photoDataUrl" @click="onDelete" style="z-index: 20">
+      <div v-if="isEditable && photoDataUrl" @click="onDeleteClick" style="z-index: 20">
         <v-icon style="position: absolute; top: 10px; right: 10px; z-index: 20">mdi-delete</v-icon>
       </div>
 
@@ -27,7 +27,7 @@
         dense
         @change="onUpload"
         @click:prepend-inner="onIconClick"
-        @click:clear="onClear"
+        @click:clear="onClearClick"
       />
     </div>
   </div>
@@ -57,11 +57,11 @@ export default {
       this.$emit('file-uploaded', event)
     },
 
-    onClear() {
+    onClearClick() {
       this.$emit('clear-clicked')
     },
 
-    onDelete() {
+    onDeleteClick() {
       if (this.uploadedDataUrl) {
         this.$refs.fileInput.clearableCallback()
       }
