@@ -25,6 +25,10 @@ export default {
     isEditable() {
       return this.$store.getters['ui/isEditable']
     },
+
+    isCreating() {
+      return this.$store.getters['ui/isCreating']
+    },
   },
 
   methods: {
@@ -33,11 +37,15 @@ export default {
         this.$store.commit('ui/setIsEditable', false)
       }
 
+      if (this.isCreating) {
+        this.$store.commit('ui/setIsCreating', false)
+      }
+
       if (this.$vuetify.breakpoint.mobile) {
         this.$store.commit('ui/setIsDrawerOpen', false)
       }
 
-      this.$store.commit('contacts/setActiveContact', this.contact)
+      this.$store.commit('contacts/setActiveContactId', this.contact.id)
     },
   },
 }

@@ -14,7 +14,10 @@
         {{ contactCardData.name }}
       </h1>
 
-      <ContactDetailsButtons :updated-contact-data="contactCardData" />
+      <ContactDetailsButtons
+        :updated-contact-data="contactCardData"
+        @cancel-clicked="updateActiveContact"
+      />
     </div>
 
     <v-form class="d-flex flex-column justify-space-between flex-grow-1" :readonly="!isEditable">
@@ -32,8 +35,9 @@
 </template>
 
 <script>
+import _cloneDeep from 'lodash/cloneDeep'
 import { CONTACT_CARD_FIELDS } from '../../common/constants.js'
-import { getBase64 } from '../../common/utils.js'
+import { generateEmptyContactTemplate, getBase64 } from '../../common/utils.js'
 import ContactDetailsItem from './ContactDetailsItem.vue'
 import ContactDetailsPhoto from './ContactDetailsPhoto.vue'
 import ContactDetailsButtons from './ContactDetailsButtons.vue'
@@ -47,7 +51,6 @@ export default {
     return {
       contactCardFields: CONTACT_CARD_FIELDS,
       contactCardData: {
-        id: '',
         photo: '',
         name: '',
         phone: '',
@@ -71,16 +74,16 @@ export default {
       return this.$store.getters['contacts/activeContact']
     },
 
-    uploadInputPlaceholder() {
-      return this.contactCardData.photo ? 'Click to change photo' : 'Click to upload photo'
-    },
-
     isEditable() {
       return this.$store.getters['ui/isEditable']
     },
 
     isCreating() {
       return this.$store.getters['ui/isCreating']
+    },
+
+    uploadInputPlaceholder() {
+      return this.contactCardData.photo ? 'Click to change photo' : 'Click to upload photo'
     },
   },
 
@@ -90,14 +93,11 @@ export default {
 
   methods: {
     updateActiveContact() {
-      this.contactCardData.id = this.activeContact.id
-      this.contactCardData.photo = this.activeContact.photo
-      this.contactCardData.name = this.activeContact.name
-      this.contactCardData.phone = this.activeContact.phone
-      this.contactCardData.birthday = this.activeContact.birthday
-      this.contactCardData.email = this.activeContact.email
-      this.contactCardData.company = this.activeContact.company
-      this.contactCardData.notes = this.activeContact.notes
+      if (this.isCreating) {
+        this.contactCardData = generateEmptyContactTemplate()
+      } else {
+        this.contactCardData = _cloneDeep(this.activeContact)
+      }
     },
 
     onInput(value, model) {

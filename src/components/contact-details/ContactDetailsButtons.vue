@@ -29,8 +29,8 @@ export default {
       return this.$store.getters['ui/isCreating']
     },
 
-    activeContact() {
-      return this.$store.getters['contacts/activeContact']
+    activeContactId() {
+      return this.$store.getters['contacts/activeContactId']
     },
   },
 
@@ -41,9 +41,10 @@ export default {
 
     onCancelClick() {
       this.$store.commit('ui/setIsEditable', false)
+      this.$emit('cancel-clicked')
 
       if (this.isCreating) {
-        this.$store.commit('contacts/setActiveContact', null)
+        this.$store.commit('contacts/setActiveContactId', null)
         this.$store.commit('ui/setIsCreating', false)
       }
     },

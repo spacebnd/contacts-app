@@ -1,7 +1,11 @@
 <template>
   <v-list>
     <v-list-item-group>
-      <ContactListItem v-for="contact of contacts" :key="contact.id" :contact="contact" />
+      <ContactListItem
+        v-for="contact of contacts"
+        :key="`contact-${contact.id}`"
+        :contact="contact"
+      />
     </v-list-item-group>
   </v-list>
 </template>

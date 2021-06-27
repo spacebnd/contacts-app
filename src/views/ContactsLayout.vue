@@ -25,7 +25,7 @@
 
     <v-main>
       <div class="d-flex justify-center" style="height: 550px">
-        <ContactDetails v-if="activeContact || isCreating" />
+        <ContactDetails v-if="activeContactId || isCreating" />
       </div>
     </v-main>
 
@@ -58,8 +58,8 @@ export default {
       },
     },
 
-    activeContact() {
-      return this.$store.getters['contacts/activeContact']
+    activeContactId() {
+      return this.$store.getters['contacts/activeContactId']
     },
 
     isCreating() {
